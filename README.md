@@ -121,3 +121,12 @@ Only `container.ts` and `app.ts` (the composition root) know about every module.
 | `programme.member_added` | programmes | alerts → `PROGRAMME_MEMBER_ADDED` to new member |
 | `programme.closed` | programmes (`close`) | reports → `STORE_SUMMARY` snapshot |
 | `inventory.low_stock` | — (no producer yet) | alerts → `INVENTORY_LOW` to store managers |
+
+## Agent harness
+
+StoreOps includes a Planner → Generator ⇄ Evaluator → Monitor agent harness for Claude Code. `CLAUDE.md` is the orchestrator. Agent definitions are in `.harness/agents/`, project-specific skill files in `.harness/skills/`, handoff templates in `.harness/templates/`, and the review archive in `.harness/reviews/`.
+
+```text
+@planner Add shift handover bulk update to tasks    # Planner writes .harness/output/spec.md + sprint contracts
+APPROVED                                            # Generator/Evaluator loop runs until every sprint passes or escalates
+```
